@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://dotgy3aue6umm"]
+
+[ext_resource type="Texture2D" uid="uid://cjrhxdqhegvos" path="res://assets/base_tile.png" id="1_lk5b8"]
+[ext_resource type="PackedScene" uid="uid://bwc725wl7wopa" path="res://player.tscn" id="2_4vivr"]
+[ext_resource type="Script" path="res://player.gd" id="3_4mffv"]
+[ext_resource type="Texture2D" uid="uid://cvismdhxa1fix" path="res://assets/tileset.png" id="4_ivq0b"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p7tq8"]
+texture = ExtResource("4_ivq0b")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:0/0 = 0
+1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_0/angular_velocity = 0.0
+0:1/0 = 0
+0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:1/0/physics_layer_0/angular_velocity = 0.0
+1:1/0 = 0
+1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:1/0/physics_layer_0/angular_velocity = 0.0
+
+[sub_resource type="TileSet" id="TileSet_whqsi"]
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_p7tq8")
+
+[node name="main" type="Node"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 1
+custom_minimum_size = Vector2(720, 480)
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_lk5b8")
+stretch_mode = 1
+
+[node name="Player" parent="." instance=ExtResource("2_4vivr")]
+position = Vector2(221, 94)
+script = ExtResource("3_4mffv")
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_whqsi")
+format = 2
+layer_0/tile_data = PackedInt32Array(655361, 0, 0, 655362, 0, 0, 655363, 0, 0, 655364, 0, 0, 655365, 0, 0, 655366, 0, 0, 655367, 0, 0, 655368, 0, 0, 655369, 0, 0, 655370, 0, 0, 655371, 0, 0, 655372, 0, 0, 655373, 0, 0, 655374, 0, 0, 655375, 0, 0, 655376, 0, 0, 655377, 0, 0, 655378, 0, 0, 655379, 0, 0, 655380, 0, 0, 655381, 0, 0, 655382, 0, 0, 655383, 0, 0, 655384, 0, 0, 655385, 0, 0, 655386, 0, 0, 655387, 0, 0)
