@@ -1,40 +1,32 @@
-extends RigidBody2D
+extends CharacterBody2D
 signal hit
 
-@export var speed = 400
-var screen_size
+var gravity 
+var has_fallen
 
 func _ready():
-	# hide()
-	screen_size = get_viewport_rect().size
+	has_fallen = true
+	gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+	$AnimatedSprite2D.animation = "idle"
 	$AnimatedSprite2D.play()
 
 
 func _process(delta):
-	var velocity = Vector2.ZERO
-	if Input.is_action_pressed("right"):
-		velocity.x += 1
-	if Input.is_action_pressed("left"):
-		velocity.x -= 1
-
-	if velocity.length() > 0:
-		velocity = velocity.normalized() * speed
-	else:
-		$AnimatedSprite2D.animation = "idle"
-
-
-	position += velocity * delta
-	position = position.clamp(Vector2.ZERO, screen_size)
-
-
-func _on_body_entered(body):
-	hide()
-	hit.emit()
-	# Must be deferred as we can't change physics properties on a physics callback.
-	$CollisionShape2D.set_deferred("disabled", true)
+	if Input.is_action_pressed("up"):
+		if Input.is_action_pressed("right"):
+			pass
+		if Input.is_action_pressed("left"):
+			pass
+		
+	if Input.is_action_pressed("down"):
+		if Input.is_action_pressed("right"):
+			pass
+		if Input.is_action_pressed("left"):
+			pass
 	
-	
-func start(pos):
-	position = pos
-	show()
-	$CollisionShape2D.disabled = false
+
+func _physics_process(delta):
+	if has_fallen:
+		velocity.y += 0.01 * gravity * delta
+		move_and_collide(velocity)
+		return
